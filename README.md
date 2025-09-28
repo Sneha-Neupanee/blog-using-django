@@ -8,7 +8,7 @@ A full-featured blog built with Django:
 - Create Post (for logged-in users)
 - Search and pagination
 - Bootstrap styling
-
+ 
 ## Quickstart
 
 ```bash

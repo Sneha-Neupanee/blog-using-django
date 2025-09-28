@@ -17,7 +17,7 @@ python -m venv venv
 .\venv\Scripts\Activate.ps1
 pip install -r requirements.txt
 
-python manage.py migrate
+python manage.py migrate 
 python manage.py loaddata blog/fixtures.json  # load sample categories
 python manage.py createsuperuser  # create admin
 python manage.py runserver

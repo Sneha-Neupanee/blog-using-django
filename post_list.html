@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Home • My Blog{% endblock %}
+{% block content %}
+  <div class="row">
+    <div class="col-lg-8">
+      {% for post in page_obj %}
+        <div class="card mb-3 shadow-sm">
+          <div class="card-body">
+            <a class="text-decoration-none" href="{% url 'post_detail' post.slug %}"><h3 class="card-title">{{ post.title }}</h3></a>
+            <p class="text-muted mb-2">
+              by {{ post.author.username }} • {{ post.created_at|date:"M d, Y" }}
+              {% if post.category %} • in <a href="/?category={{ post.category.slug }}">{{ post.category.name }}</a>{% endif %}
+            </p>
+            <p class="card-text">{{ post.content|truncatechars:220 }}</p>
+            <a href="{% url 'post_detail' post.slug %}" class="btn btn-primary btn-sm">Read more</a>
+          </div>
+        </div>
+      {% empty %}
+        <p>No posts yet.</p>
+      {% endfor %}
+
+      <nav aria-label="Page navigation">
+        <ul class="pagination">
+          {% if page_obj.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if active_category %}&category={{ active_category }}{% endif %}{% if query %}&q={{ query }}{% endif %}">Previous</a></li>
+          {% endif %}
+          <li class="page-item disabled"><span class="page-link">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span></li>
+          {% if page_obj.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}{% if active_category %}&category={{ active_category }}{% endif %}{% if query %}&q={{ query }}{% endif %}">Next</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+    </div>
+    <div class="col-lg-4">
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Categories</h5>
+          <div class="list-group list-group-flush">
+            <a class="list-group-item list-group-item-action {% if not active_category %}active{% endif %}" href="/">All</a>
+            {% for cat in categories %}
+              <a class="list-group-item list-group-item-action {% if active_category == cat.slug %}active{% endif %}" href="/?category={{ cat.slug }}">{{ cat.name }}</a>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

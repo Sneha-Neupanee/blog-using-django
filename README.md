@@ -7,7 +7,7 @@ A full-featured blog built with Django:
 - Auth: signup, login, logout
 - Create Post (for logged-in users)
 - Search and pagination
-- Bootstrap styling
+- Bootstrap styling 
  
 ## Quickstart
 

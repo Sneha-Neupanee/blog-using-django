@@ -2,7 +2,7 @@
 
 A full-featured blog built with Django:
 - Posts with slugs
-- Categories
+- Categories 
 - Comments
 - Auth: signup, login, logout
 - Create Post (for logged-in users)
